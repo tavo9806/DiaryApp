@@ -1,0 +1,61 @@
+﻿@model List<DiaryEntry>
+
+@{
+    ViewData["Title"] = "Dairy Entries";
+}
+
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col-6">
+            <a class="btn btn-dark px-3" asp-controller="DairyEntries" asp-action="CreateEntry">
+                Create new entry
+                <i class="bi bi-journal-plus"></i>
+            </a>
+        </div>
+
+        <div class="col-6 text-end">
+            <h2>Dairy Entries</h2>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-responsive">
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var entry in Model)
+            {
+                <tr>
+                    <td>@entry.Title</td>
+                    <td>@entry.Description</td>
+                    <td>@entry.CreatedAt</td>
+                    <td>
+                        <a asp-controller="DairyEntries" asp-action="EditEntry" asp-route-id="@entry.DairyId" class="btn btn-primary">
+                            Edit
+                            <i class="bi bi-pencil"></i>
+                        </a>
+
+                        <a asp-controller="DairyEntries" asp-action="DeleteEntry" asp-route-id="@entry.DairyId" class="btn btn-danger">
+                            Delete
+                            <i class="bi bi-eraser"></i>
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
